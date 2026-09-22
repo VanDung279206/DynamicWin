@@ -1,12 +1,36 @@
 ﻿<Window x:Class="DynamicWin.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DynamicWin"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="DynamicWin"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        Topmost="True"
+        ResizeMode="NoResize"
+        SizeToContent="Manual"
+        Width="700"
+        Height="400"
+        WindowStartupLocation="Manual">
 
-    </Grid>
+    <!--
+        Root Canvas: completely transparent background.
+        The black hole + orbital objects are drawn via code-behind
+        using CompositionTarget.Rendering → InvalidateVisual() on OrbitalCanvas.
+        
+        We keep XAML minimal — all visual logic lives in OrbitalCanvas (OnRender).
+    -->
+    <Canvas x:Name="RootCanvas"
+            Background="Transparent"
+            MouseMove="RootCanvas_MouseMove"
+            MouseLeave="RootCanvas_MouseLeave">
+
+        <!-- OrbitalCanvas is our custom drawing surface, defined in code -->
+        <local:OrbitalCanvas x:Name="OrbitalCanvas"
+                             xmlns:local="clr-namespace:DynamicWin"
+                             Width="700"
+                             Height="400"
+                             Background="Transparent" />
+    </Canvas>
+
 </Window>

@@ -10,4 +10,3 @@ namespace DynamicWin;
 public partial class App : Application
 {
 }
-
